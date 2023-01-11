@@ -1,0 +1,25 @@
+{
+  "name": "stringify-function",
+  "version": "1.0.0",
+  "description": "Recursive function for deep transforming any object with enumerated properties to JSON format, including Map and Set objects",
+  "readmeFilename": "README.md",
+  "main": "stringifyFunction.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "repo"
+  },
+  "keywords": [
+    "stringify",
+    "toString",
+    "JSON"
+  ],
+  "author": {
+    "name": "Luan Rafael",
+    "email": "luanrafaelberto@gmail.com",
+    "homepage": "https://github.com/LBtek"
+  },
+  "license": "ISC"
+}
