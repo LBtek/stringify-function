@@ -1,4 +1,4 @@
-function stringify(item) {
+export default function stringify(item) {
   let response
   if (item instanceof Map) 
     response = prepareMap(item)

@@ -4,12 +4,13 @@
   "description": "Recursive function for deep transforming any object with enumerated properties to JSON format, including Map and Set objects",
   "readmeFilename": "README.md",
   "main": "stringifyFunction.js",
+  "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
-    "url": "repo"
+    "url": "https://github.com/LBtek/stringify-function.git"
   },
   "keywords": [
     "stringify",
