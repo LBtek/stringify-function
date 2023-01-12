@@ -10,10 +10,17 @@ export default function stringify(item) {
     response = prepareObject(item)
   else response = item
 
+  ws = new WeakSet()
+
   return JSON.stringify(response)
 }
 
+let ws = new WeakSet()
+
 function prepareObject(object) {
+  if (ws.has(object)) return Object.prototype.toString.call(object)
+  ws.add(object)
+
   let obj = {}
   let arr = Object.entries(object)
   for (let i = 0; i < arr.length; i++) {
@@ -33,6 +40,9 @@ function prepareObject(object) {
 }
 
 function prepareArray(array) {
+  if (ws.has(array)) return Object.prototype.toString.call(array)
+  ws.add(array)
+
   let arr = new Array(array.length)
   array.forEach((e, id) => {
     if (e instanceof Map) {
@@ -49,6 +59,9 @@ function prepareArray(array) {
 }
 
 function prepareSet(setObj) {
+  if (ws.has(setObj)) return Object.prototype.toString.call(setObj)
+  ws.add(setObj)
+
   let arr = [...setObj]
 
   for (let i = 0; i < arr.length; i++) {
@@ -65,6 +78,9 @@ function prepareSet(setObj) {
 }
 
 function prepareMap(map) {
+  if (ws.has(map)) return Object.prototype.toString.call(map)
+  ws.add(map)
+
   let arr = [...map]
 
   for (let i = 0; i < arr.length; i++) {
