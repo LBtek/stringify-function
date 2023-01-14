@@ -1,4 +1,5 @@
 function prepare( item ) {
+
    let response
 
    if ( item instanceof Map )
@@ -26,6 +27,7 @@ function prepare( item ) {
 
 
    return response
+
 }
 
 
@@ -35,7 +37,9 @@ export default function stringify( item ) {
 
    ws = new WeakSet()
 
+
    return JSON.stringify(response)
+
 }
 
 
@@ -50,16 +54,21 @@ function prepareObject( object ) {
    ws.add(object)
 
    let obj = {}
-   let arr = Object.entries(object)
+   let array = Object.entries(object)
 
-   for (let i = 0; i < arr.length; i++) {
+   for (let i = 0; i < array.length; i++) {
 
-      const key = arr[i][0]
-      obj[key] = prepare(arr[i][1])
+      const key = array[i][0]
+
+      obj[key] = prepare(array[i][1])
+
    }
 
+
    return obj
+
 }
+
 
 function prepareArray( array ) {
 
@@ -73,10 +82,14 @@ function prepareArray( array ) {
    array.forEach(( item, i ) => {
 
       newArray[i] = prepare(item)
+
    })
 
+
    return newArray
+
 }
+
 
 function prepareSet( setObj ) {
 
@@ -85,18 +98,22 @@ function prepareSet( setObj ) {
 
    ws.add(setObj)
 
-   let newArray = [...setObj]
+   let array = [...setObj]
 
-   for (let i = 0; i < newArray.length; i++) {
+   for (let i = 0; i < array.length; i++) {
 
-      newArray[i] = prepare(newArray[i])
+      array[i] = prepare(array[i])
+
    }
 
-   if (!newArray.length) 
+   if ( !array.length ) 
       return Object.prototype.toString.call(setObj)
 
-   return newArray
+
+   return array
+
 }
+
 
 function prepareMap( map ) {
 
@@ -105,17 +122,20 @@ function prepareMap( map ) {
 
    ws.add(map)
 
-   let newArray = [...map]
+   let array = [...map]
 
-   for (let i = 0; i < newArray.length; i++) {
+   for (let i = 0; i < array.length; i++) {
 
-      newArray[i][0] = prepare(newArray[i][0])
-      newArray[i][1] = prepare(newArray[i][1])
+      array[i][0] = prepare(array[i][0])
+
+      array[i][1] = prepare(array[i][1])
+
    }
 
-   if (!newArray.length) 
+   if ( !array.length ) 
       return Object.prototype.toString.call(map)
    
-   return newArray
+
+   return array
 
 }
