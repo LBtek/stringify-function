@@ -12,14 +12,17 @@ function prepare( item ) {
       response = prepareSet(item)
 
    else if ( item instanceof Object )
+      
+      if ( item instanceof String )
+         response = item
+   
+      else if ( item instanceof Function )
+         response = typeof item.toString === 'function' 
+            && typeof item.toString() === 'string' 
+               ? item.toString() 
+               : Object.prototype.toString.call(item)
 
-      if (
-         item instanceof Function ||
-         item instanceof String
-      )
-         response = item.toString() || Object.prototype.toString.call(item)
-
-      else
+      else 
          response = prepareObject(item)
 
    else
@@ -53,10 +56,11 @@ function prepareObject( object ) {
 
    ws.add(object)
 
-   let obj = {}
    let array = Object.entries(object)
 
-   for (let i = 0; i < array.length; i++) {
+   let obj = {}
+
+   for ( let i = 0; i < array.length; i++ ) {
 
       const key = array[i][0]
 
@@ -100,7 +104,7 @@ function prepareSet( setObj ) {
 
    let array = [...setObj]
 
-   for (let i = 0; i < array.length; i++) {
+   for ( let i = 0; i < array.length; i++ ) {
 
       array[i] = prepare(array[i])
 
@@ -124,7 +128,7 @@ function prepareMap( map ) {
 
    let array = [...map]
 
-   for (let i = 0; i < array.length; i++) {
+   for ( let i = 0; i < array.length; i++ ) {
 
       array[i][0] = prepare(array[i][0])
 
